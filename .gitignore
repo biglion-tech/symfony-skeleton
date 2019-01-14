@@ -1,0 +1,18 @@
+# composer
+/vendor
+
+# ide
+.idea/
+
+###> symfony/framework-bundle ###
+/.env
+/public/bundles/
+/tmp/
+###< symfony/framework-bundle ###
+
+###> phpunit/phpunit ###
+/phpunit.xml
+###< phpunit/phpunit ###
+
+# helm
+charts/main/charts

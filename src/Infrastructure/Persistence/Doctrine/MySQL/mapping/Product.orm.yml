@@ -1,0 +1,22 @@
+App\Domain\Product\Product:
+  type: entity
+  repositoryClass: App\Infrastructure\Persistence\Doctrine\Repository\ProductRepository
+  table: product
+  id:
+    id:
+      type: smallint
+      options:
+        unsigned: true
+      generator:
+        strategy: AUTO
+  fields:
+    name:
+      type: string
+      length: 255
+      nullable: false
+      options:
+        comment: 'name'
+    price:
+      type: integer
+      options:
+        comment: 'price'

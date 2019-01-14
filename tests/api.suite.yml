@@ -1,0 +1,25 @@
+params:
+    - .env
+actor: ApiTester
+modules:
+    enabled:
+        - \App\Tests\Helper\Api
+        - Symfony:
+              app_path: 'src'
+              var_path: 'var'
+              environment: 'test'
+        - Doctrine2:
+              depends: Symfony
+              cleanup: false
+        - PhpBrowser:
+              url: 'http://localhost/'
+        - REST:
+              url: 'http://localhost/api/v1/'
+              depends: PhpBrowser #Symfony
+              part: Json
+              timeout: 60
+        - Db:
+#              dsn: %DATABASE_URL%
+              dsn: 'mysql:host=localhost:3306;dbname=test'
+              user: 'root'
+        -  Asserts:
