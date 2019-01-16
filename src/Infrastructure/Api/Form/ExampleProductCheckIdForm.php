@@ -2,7 +2,7 @@
 
 namespace App\Infrastructure\Api\Form;
 
-use App\Domain\RepositoryInterface\ProductRepositoryInterface;
+use App\Domain\RepositoryInterface\ExampleProductRepositoryInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -12,21 +12,21 @@ use Symfony\Component\Validator\Constraints\Range;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 /**
- * Class ProductCheckIdForm
+ * Class ExampleProductCheckIdForm
  * @package App\Infrastructure\Api\Form
  */
-class ProductCheckIdForm extends AbstractType
+class ExampleProductCheckIdForm extends AbstractType
 {
     /**
-     * @var ProductRepositoryInterface
+     * @var ExampleProductRepositoryInterface
      */
     protected $repository;
 
     /**
      * ProductCheckIdForm constructor.
-     * @param ProductRepositoryInterface $repository
+     * @param ExampleProductRepositoryInterface $repository
      */
-    public function __construct(ProductRepositoryInterface $repository)
+    public function __construct(ExampleProductRepositoryInterface $repository)
     {
         $this->repository = $repository;
     }

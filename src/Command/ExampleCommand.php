@@ -2,17 +2,16 @@
 
 namespace App\Command;
 
-use App\Infrastructure\Tmp\ImportReceiptData;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
- * Class ImportHistoryReceiptData
+ * Class ExampleCommand
  * @package App\Command
  */
-class TestCommand extends Command
+class ExampleCommand extends Command
 {
     /**
      * Конфигурация вызова команды импорта

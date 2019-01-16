@@ -5,10 +5,10 @@ namespace App\Infrastructure\Api\Controller;
 use App\Application\Exception\FormValidationException;
 use App\Application\RequestFormValidationHelper;
 use App\Application\ResponseFactory;
-use App\Application\Product\ProductService;
-use App\Domain\Product\TestProduct;
-use App\Infrastructure\Api\Form\ProductCheckIdForm;
-use App\Infrastructure\Api\Models\Validation\ProductCheckId;
+use App\Application\Product\ExampleProductService;
+use App\Domain\Product\ExampleProduct;
+use App\Infrastructure\Api\Form\ExampleProductCheckIdForm;
+use App\Infrastructure\Api\Models\Validation\ExampleProductCheckId;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,26 +17,26 @@ use Nelmio\ApiDocBundle\Annotation\Model;
 use Swagger\Annotations as SWG;
 use App\Infrastructure\Api\Models\Response\DictionaryObject;
 
-class TestApiController extends AbstractController
+class ExampleApiController extends AbstractController
 {
     /**
      * @SWG\Response(
      *     response=200,
      *     description="Get Product",
-     *     @Model(type=TestProduct::class)
+     *     @Model(type=ExampleProduct::class)
      * )
-     * @SWG\Tag(name="Test")
+     * @SWG\Tag(name="example")
      *
-     * @Route("/api/v1/test/product/{id}", name="product_by_id", methods={"GET"}, requirements={"id"="\d+"})
+     * @Route("/api/v1/example/product/{id}", name="product_by_id", methods={"GET"}, requirements={"id"="\d+"})
      * @param $id
      * @param Request $request
-     * @param ProductService $productService
+     * @param ExampleProductService $productService
      * @return Response
      * @throws FormValidationException
      */
-    public function getProductByIdAction($id, Request $request, ProductService $productService): Response
+    public function getProductByIdAction($id, Request $request, ExampleProductService $productService): Response
     {
-        $form = $this->createForm(ProductCheckIdForm::class, new ProductCheckId());
+        $form = $this->createForm(ExampleProductCheckIdForm::class, new ExampleProductCheckId());
         $form->submit(['id' => $id]);
         RequestFormValidationHelper::validate($form);
 

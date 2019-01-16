@@ -3,14 +3,14 @@
 namespace App\Tests\Application\ReceiptService;
 
 use App\Application\ReceiptService\ReceiptService;
-use App\Application\Product\ProductService;
-use App\Domain\Product\TestProduct;
+use App\Application\Product\ExampleProductService;
+use App\Domain\Product\ExampleProduct;
 use Doctrine\ORM\EntityManager;
 
 class ProductServiceTest extends \Codeception\Test\Unit
 {
     /**
-     * @var ProductService
+     * @var ExampleProductService
      */
     protected $service;
 
@@ -20,7 +20,7 @@ class ProductServiceTest extends \Codeception\Test\Unit
     protected $entityManager;
 
     /**
-     * @var TestProduct
+     * @var ExampleProduct
      */
     protected $product;
 
@@ -28,10 +28,10 @@ class ProductServiceTest extends \Codeception\Test\Unit
     {
         /** @var \Codeception\Module\Symfony $module */
         $module = $this->getModule('Symfony');
-        $this->service = $module->kernel->getContainer()->get(ProductService::class);
+        $this->service = $module->kernel->getContainer()->get(ExampleProductService::class);
         $this->entityManager = $module->kernel->getContainer()->get('doctrine.orm.entity_manager');
 
-        $product = new TestProduct();
+        $product = new ExampleProduct();
         $product->setName('test');
         $product->setPrice(10);
 

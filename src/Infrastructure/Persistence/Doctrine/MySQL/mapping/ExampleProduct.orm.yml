@@ -1,6 +1,6 @@
-App\Domain\Product\TestProduct:
+App\Domain\Product\ExampleProduct:
   type: entity
-  repositoryClass: App\Infrastructure\Persistence\Doctrine\Repository\ProductRepository
+  repositoryClass: App\Infrastructure\Persistence\Doctrine\Repository\ExampleProductRepository
   table: product
   id:
     id:

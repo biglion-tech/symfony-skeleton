@@ -2,7 +2,11 @@
 
 namespace App\Infrastructure\Api\Models\Validation;
 
-class ProductCheckId
+/**
+ * Class ExampleProductCheckId
+ * @package App\Infrastructure\Api\Models\Validation
+ */
+class ExampleProductCheckId
 {
     /**
      * @var integer
