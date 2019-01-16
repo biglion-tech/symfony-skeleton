@@ -23,4 +23,4 @@ doctrine:
             App:
                 type: yml
                 dir: '%kernel.project_dir%/src/Infrastructure/Persistence/Doctrine/MySQL/mapping'
-                prefix: 'App\Domain\Product'
+                prefix: 'App\Domain\Entity'

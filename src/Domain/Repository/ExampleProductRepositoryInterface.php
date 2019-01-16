@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Domain\RepositoryInterface;
+namespace App\Domain\Repository;
 
-use App\Domain\Product\ExampleProduct;
+use App\Domain\Entity\ExampleProduct;
 
 /**
  * Interface ExampleProductRepositoryInterface

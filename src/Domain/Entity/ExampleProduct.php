@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Domain\Product;
+namespace App\Domain\Entity;
 
 /**
  * Class ExampleProduct
- * @package App\Domain\Product
+ * @package App\Domain\Entity
  */
 class ExampleProduct
 {

@@ -2,8 +2,8 @@
 
 namespace App\Application\Product;
 
-use App\Domain\RepositoryInterface\ExampleProductRepositoryInterface;
-use App\Domain\Product\ExampleProduct;
+use App\Domain\Entity\ExampleProduct;
+use App\Domain\Repository\ExampleProductRepositoryInterface;
 
 /**
  * Class ExampleProductService

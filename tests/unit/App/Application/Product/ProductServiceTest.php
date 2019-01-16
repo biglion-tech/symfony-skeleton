@@ -4,7 +4,7 @@ namespace App\Tests\Application\ReceiptService;
 
 use App\Application\ReceiptService\ReceiptService;
 use App\Application\Product\ExampleProductService;
-use App\Domain\Product\ExampleProduct;
+use App\Domain\Entity\ExampleProduct;
 use Doctrine\ORM\EntityManager;
 
 class ProductServiceTest extends \Codeception\Test\Unit

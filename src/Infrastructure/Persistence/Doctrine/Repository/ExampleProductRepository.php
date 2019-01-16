@@ -2,8 +2,8 @@
 
 namespace App\Infrastructure\Persistence\Doctrine\Repository;
 
-use App\Domain\RepositoryInterface\ExampleProductRepositoryInterface;
-use App\Domain\Product\ExampleProduct;
+use App\Domain\Entity\ExampleProduct;
+use App\Domain\Repository\ExampleProductRepositoryInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 

@@ -6,12 +6,13 @@ use App\Application\Exception\FormValidationException;
 use App\Application\RequestFormValidationHelper;
 use App\Application\ResponseFactory;
 use App\Application\Product\ExampleProductService;
-use App\Domain\Product\ExampleProduct;
+use App\Domain\Entity\ExampleProduct;
 use App\Infrastructure\Api\Form\ExampleProductCheckIdForm;
 use App\Infrastructure\Api\Models\Validation\ExampleProductCheckId;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use Swagger\Annotations as SWG;
@@ -41,6 +42,10 @@ class ExampleApiController extends AbstractController
         RequestFormValidationHelper::validate($form);
 
         $responseData = $productService->getProductById($id);
+
+        if ($responseData === null) {
+            throw new NotFoundHttpException('Product with id ' . $id . ' not found!');
+        }
 
         return ResponseFactory::create($request, $responseData);
     }

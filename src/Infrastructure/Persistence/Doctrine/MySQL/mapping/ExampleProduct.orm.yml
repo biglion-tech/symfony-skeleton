@@ -1,4 +1,4 @@
-App\Domain\Product\ExampleProduct:
+App\Domain\Entity\ExampleProduct:
   type: entity
   repositoryClass: App\Infrastructure\Persistence\Doctrine\Repository\ExampleProductRepository
   table: product
