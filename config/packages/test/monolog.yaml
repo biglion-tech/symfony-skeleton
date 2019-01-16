@@ -1,0 +1,26 @@
+monolog:
+  channels:
+    - 'import_history_receipt_data'
+    - 'http_api_exception'
+  handlers:
+    main:
+      type: stream
+      path: "%kernel.logs_dir%/%kernel.environment%.log"
+      level: warning
+      channels:
+        - '!import_history_receipt_data'
+        - '!http_api_exception'
+    import_history_receipt_data:
+      type: stream
+      path: '%kernel.logs_dir%/import/receipt/import_history_data.log'
+      level: debug
+      channels: ['import_history_receipt_data', 'console']
+    http_api_exception:
+      type: stream
+      path: '%kernel.logs_dir%/exceptions/http_api_exception.log'
+      level: debug
+      channels: ['http_api_exception']
+    console:
+      type: console
+      process_psr_3_messages: false
+      channels: ["!event", "!doctrine", "!console"]
