@@ -6,7 +6,7 @@ namespace App\Domain\Product;
  * Class Product
  * @package App\Domain\Product
  */
-class Product
+class TestProduct
 {
     /**
      * @var integer
@@ -33,9 +33,9 @@ class Product
 
     /**
      * @param string $name
-     * @return Product
+     * @return TestProduct
      */
-    public function setName($name): Product
+    public function setName($name): TestProduct
     {
         $this->name = $name;
         return $this;
@@ -51,9 +51,9 @@ class Product
 
     /**
      * @param integer $price
-     * @return Product
+     * @return TestProduct
      */
-    public function setPrice($price): Product
+    public function setPrice($price): TestProduct
     {
         $this->price = $price;
         return $this;

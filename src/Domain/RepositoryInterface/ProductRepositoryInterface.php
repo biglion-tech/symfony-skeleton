@@ -2,7 +2,7 @@
 
 namespace App\Domain\RepositoryInterface;
 
-use App\Domain\Product\Product;
+use App\Domain\Product\TestProduct;
 
 /**
  * Interface ProductRepositoryInterface
@@ -12,8 +12,8 @@ interface ProductRepositoryInterface
 {
     /**
      * @param int $id
-     * @return Product|null
+     * @return TestProduct|null
      */
-    public function getProductById(int $id): ?Product;
+    public function getProductById(int $id): ?TestProduct;
 
 }

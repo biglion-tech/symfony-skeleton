@@ -2,7 +2,7 @@
 
 namespace App\DataFixtures;
 
-use App\Domain\Product\Product;
+use App\Domain\Product\TestProduct;
 use App\Entity\Project;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -17,7 +17,7 @@ class TestFixtures extends Fixture
     public function load(ObjectManager $manager) : void
     {
         for ($i = 0; $i < 20; $i++) {
-            $product = new Product();
+            $product = new TestProduct();
             $product->setName('product ' . $i);
             $product->setPrice($i);
             $manager->persist($product);

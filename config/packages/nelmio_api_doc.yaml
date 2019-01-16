@@ -1,8 +1,8 @@
 nelmio_api_doc:
     documentation:
         info:
-            title: Tets API documentation
-            description: Test
+            title: API documentation
+            description: API documentation
             version: 1.0.0
     areas: # to filter documented areas
         path_patterns:

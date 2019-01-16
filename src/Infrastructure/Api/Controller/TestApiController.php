@@ -6,7 +6,7 @@ use App\Application\Exception\FormValidationException;
 use App\Application\RequestFormValidationHelper;
 use App\Application\ResponseFactory;
 use App\Application\Product\ProductService;
-use App\Domain\Product\Product;
+use App\Domain\Product\TestProduct;
 use App\Infrastructure\Api\Form\ProductCheckIdForm;
 use App\Infrastructure\Api\Models\Validation\ProductCheckId;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -23,7 +23,7 @@ class TestApiController extends AbstractController
      * @SWG\Response(
      *     response=200,
      *     description="Get Product",
-     *     @Model(type=Product::class)
+     *     @Model(type=TestProduct::class)
      * )
      * @SWG\Tag(name="Test")
      *

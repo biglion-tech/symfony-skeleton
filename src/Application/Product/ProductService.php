@@ -3,7 +3,7 @@
 namespace App\Application\Product;
 
 use App\Domain\RepositoryInterface\ProductRepositoryInterface;
-use App\Domain\Product\Product;
+use App\Domain\Product\TestProduct;
 
 class ProductService
 {
@@ -26,7 +26,7 @@ class ProductService
     {
         $product = $this->productRepository->getProductById($id);
 
-        return ($product instanceof Product) ? $product->toArray() : null;
+        return ($product instanceof TestProduct) ? $product->toArray() : null;
     }
 
 }
