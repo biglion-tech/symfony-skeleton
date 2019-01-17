@@ -1,7 +1,7 @@
 {
     "type": "project",
     "name": "biglion-tech/skeleton",
-    "description": "Чеки (backend)",
+    "description": "Custom symfony skeleton",
     "license": "proprietary",
     "minimum-stability": "stable",
     "authors": [],
