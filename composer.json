@@ -1,6 +1,6 @@
 {
     "type": "project",
-    "name": "biglion-tech/receipt-backend",
+    "name": "biglion-tech/skeleton",
     "description": "Чеки (backend)",
     "license": "proprietary",
     "minimum-stability": "stable",
