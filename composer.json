@@ -1,6 +1,6 @@
 {
     "type": "project",
-    "name": "biglion-tech/skeleton",
+    "name": "biglion-tech/symfony-skeleton",
     "description": "Custom symfony skeleton",
     "license": "proprietary",
     "minimum-stability": "stable",
