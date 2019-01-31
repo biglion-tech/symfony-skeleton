@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Infrastructure\Api\Form;
+namespace App\UI\Form;
 
 use App\Domain\RepositoryInterface\ExampleProductRepositoryInterface;
 use Symfony\Component\Form\AbstractType;

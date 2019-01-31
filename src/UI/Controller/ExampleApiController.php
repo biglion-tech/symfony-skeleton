@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Infrastructure\Api\Controller;
+namespace App\UI\Controller;
 
 use App\Application\Exception\FormValidationException;
 use App\Application\RequestFormValidationHelper;
 use App\Application\ResponseFactory;
 use App\Application\Product\ExampleProductService;
 use App\Domain\Entity\ExampleProduct;
-use App\Infrastructure\Api\Form\ExampleProductCheckIdForm;
-use App\Infrastructure\Api\Models\Validation\ExampleProductCheckId;
+use App\UI\Form\ExampleProductCheckIdForm;
+use App\UI\Models\Validation\ExampleProductCheckId;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -16,7 +16,6 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use Swagger\Annotations as SWG;
-use App\Infrastructure\Api\Models\Response\DictionaryObject;
 
 class ExampleApiController extends AbstractController
 {

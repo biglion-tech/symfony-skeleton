@@ -15,7 +15,7 @@ class ExampleProductService
     /**
      * @var ExampleProductRepositoryInterface
      */
-    protected $productRepository;
+    private $productRepository;
 
     public function __construct(ExampleProductRepositoryInterface $productRepository)
     {

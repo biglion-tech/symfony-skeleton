@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Infrastructure\Api\Models\Validation;
+namespace App\UI\Models\Validation;
 
 /**
  * Class ExampleProductCheckId
