@@ -9,8 +9,7 @@ Includes:
 
 ## Install
  ```bash
- composer create-project biglion-tech/skeleton \
+ composer create-project biglion-tech/symfony-skeleton \
  --stability=dev \
- --repository='{"type": "composer", "url": "http://toran.kube.bigln.ru/repo/private/"}' \
  --no-secure-http
  ```
