@@ -48,15 +48,7 @@
                 "url": "https://asset-packagist.org"
             },
             {
-                "type": "composer",
-                "url": "http://toran.kube.bigln.ru/repo/private/"
-            },
-            {
-                "type": "composer",
-                "url": "http://toran.kube.bigln.ru/repo/packagist/"
-            },
-            {
-                "packagist": false
+                "packagist": true
             }
         ],
         "process-timeout": 1800,
