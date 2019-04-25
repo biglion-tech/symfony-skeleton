@@ -1,0 +1,23 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: {{ template "fullname" . }}-configmap
+  labels:
+    app.kubernetes.io/name: {{ template "name" . }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/component: "config.app"
+    helm.sh/chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
+    app: {{ template "fullname" . }}
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+    release: "{{ .Release.Name }}"
+    heritage: "{{ .Release.Service }}"
+data:
+  DEBUG: {{ int .Values.app.deployment.env.debug | quote }}
+  APP_ENV: {{ default "prod" .Values.app.deployment.env.env_type | quote }}
+  DATABASE_URL: {{ .Values.app.deployment.env.mysql_database_url | quote }}
+  SENTRY_DSN: {{ .Values.app.deployment.env.sentry_dsn | quote }}
+  PHP_ERROR_REPORTING: {{ int .Values.app.deployment.env.php.error_reporting | quote }}
+  XDEBUG_REMOTE_HOST: {{ .Values.app.deployment.env.xdebug_remote_host | quote }}
+  PHP_IDE_CONFIG: {{ .Values.app.deployment.env.php.ide_config | quote }}
+  APP_SECRET: {{ .Values.app.deployment.env.app_secret | quote }}

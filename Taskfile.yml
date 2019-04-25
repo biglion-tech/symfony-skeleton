@@ -1,0 +1,112 @@
+---
+version: '2'
+
+### Usage conventions
+## Docs
+# Client side tasks should be documented using `desc:`
+# Internal tasks should be documented using comments before task
+## Sorting
+# tasks and variables names should be sorted ASC. default always first
+## Variables
+# `CMD_...`. Command string to call.
+# `CACHE_IMAGE_...`. Image names used as cache
+# `IMAGE...`. Image names
+## Tasks
+# `deploy...`. Tasks to deploy app to some type of environment
+# `build...`. Tasks to build some artifact
+# `require...`. Install dependencies or do nothing.
+# `watch...`. Watch sources and run some build
+# `lint...`. Quick check syntax errors
+
+vars:
+  CHART_PATH: "charts/main"
+  CMD_POD_NAME_APP:
+    kubectl get pods -l app=skeleton-app  --output=jsonpath={.items..metadata.name}
+  RELEASE_BASE: "skeleton"
+
+tasks:
+  default:
+    cmds:
+      - task --list
+
+  build:
+    cmds:
+      - docker build . --file=build/docker/php/Dockerfile --target=runtime-php
+        --tag "{{ .REPOSITORY_BASE }}/php:{{ .CI_PIPELINE_ID }}"
+      - docker build . --file=build/docker/nginx/Dockerfile --target=runtime-nginx
+        --tag "{{ .REPOSITORY_BASE }}/nginx:{{ .CI_PIPELINE_ID }}"
+
+  ## Deploy somewhere.
+  # Depends on vars:
+  # - ENVIRONMENT_TYPE. Affects values batch, release suffix
+  # - REPOSITORY_BASE. Affects prefix of images repository
+  # - IMAGES_TAG. Affects images tag to use
+  # - DEPLOY_ADDITIONAL_PARAMS. Smth else to pass to `helm upgrade ...`
+  deploy:
+    cmds:
+      - helm dependency build {{ .CHART_PATH }}
+      - helm upgrade --install --wait --force
+        {{ .RELEASE_BASE }}-{{ .ENVIRONMENT_TYPE }} {{ .CHART_PATH }}
+          -f {{ .CHART_PATH }}/values.yaml
+          -f {{ .CHART_PATH }}/values-{{ .ENVIRONMENT_TYPE }}.yaml
+          --set project.repository="{{ .REPOSITORY_BASE }}"
+          --set project.tag="{{ .IMAGES_TAG }}"
+        {{ default "" .DEPLOY_ADDITIONAL_PARAMS }}
+
+
+  deploy-dev:
+    desc:
+      "Build and deploy app to dev-platform to begin development."
+    cmds:
+      - composer global exec -v mk start
+      - docker build . --target=runtime-php --file=build/docker/php/Dockerfile
+        --tag "{{ .REPOSITORY_BASE }}/php:{{ .IMAGE_TAG }}"
+      - docker build . --target=runtime-nginx --file=build/docker/nginx/Dockerfile
+        --tag "{{ .REPOSITORY_BASE }}/nginx:{{ .IMAGE_TAG }}"
+      - composer global exec -v mk mount "${PWD}"
+      - task: deploy
+        vars:
+          ENVIRONMENT_TYPE: "dev"
+          IMAGES_TAG: "latest-runtime"
+          REPOSITORY_BASE: "skeleton"
+          DEPLOY_ADDITIONAL_PARAMS:
+            --recreate-pods
+            --set app.deployment.volumes.application=${PWD}
+    status:
+      - if [ -z $(helm ls -q {{ printf "%s-dev" .RELEASE_BASE }}) ]; then exit 1; else exit 0; fi
+    env:
+      COMPOSER_PROCESS_TIMEOUT: "0"
+    vars:
+      IMAGE_TAG: "latest-runtime"
+      REPOSITORY_BASE: "skeleton"
+
+  exec-php:
+    desc:
+      "Connect to php container shell.
+      If you are annoyed with terminal width, use `COLUMNS=$COLUMNS task exec-php`"
+    cmds:
+      - kubectl exec -it $({{ .CMD_POD_NAME_APP }}) --container=php env COLUMNS=$COLUMNS LINES=$LINES TERM=$TERM sh
+  exec-test:
+    desc: "Run tests inside dev env"
+    cmds:
+      - kubectl exec -it $({{ .CMD_POD_NAME_APP }}) --container=php
+        ./vendor/bin/codecept run tests/unit/App/ -- --env=test
+
+  lint:
+    desc: "Quick syntax tests"
+    cmds:
+      - task: lint-helm
+  lint-helm:
+    cmds:
+      - helm lint {{ .CHART_PATH }} -f {{ .CHART_PATH }}/values.yaml
+
+  logs-php:
+    desc:
+      "Follow logs of php container"
+    cmds:
+      - kubectl logs -f $({{ .CMD_POD_NAME_APP }}) --container=php
+  logs-nginx:
+    desc:
+      "Follow logs of nginx container"
+    cmds:
+      - kubectl logs -f $({{ .CMD_POD_NAME_APP }}) --container=nginx

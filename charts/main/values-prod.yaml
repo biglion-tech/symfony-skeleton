@@ -1,0 +1,17 @@
+project:
+  tag:
+app:
+  ingress:
+    host: skeleton.biglion.app
+  deployment:
+    # environment variables
+    env:
+      env_type: 'prod'
+      # enables display errors of php and debug mode of app
+      debug: "0"
+      sentry_dsn: ""
+      mysql_database_url: "mysql://root:skeleton@skeleton-prod-percona/skeleton"
+      app_secret: "f770a693a149f7c3aa64b241977e23d4"
+
+percona:
+  enabled: false
