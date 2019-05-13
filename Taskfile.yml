@@ -19,7 +19,7 @@ version: '2'
 # `lint...`. Quick check syntax errors
 
 vars:
-  CHART_PATH: "charts/main"
+  CHART_PATH: "charts/skeleton"
   CMD_POD_NAME_APP:
     kubectl get pods -l app=skeleton-app  --output=jsonpath={.items..metadata.name}
   RELEASE_BASE: "skeleton"
