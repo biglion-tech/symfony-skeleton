@@ -1,0 +1,18 @@
+{{- $serviceName := include "fullname" . -}}
+kind: Ingress
+apiVersion: extensions/v1beta1
+metadata:
+  name: {{ template "fullname" . }}
+  labels:
+    app: {{ template "name" . }}
+    chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+spec:
+  rules:
+  - host: {{ .Values.app.ingress.host }}
+    http:
+      paths:
+      - backend:
+          serviceName: {{ $serviceName }}-app
+          servicePort: 80

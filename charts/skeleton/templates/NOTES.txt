@@ -1,0 +1,5 @@
+Приложение доступно по адресу: {{ .Values.app.ingress.host }}
+Терминал к контейнеру приложения: "task exec-php"
+{{- if .Values.app.nodePorts.percona }}
+Для доступа к MySQL с внешнего клиета можно использовать DSN: "mysql://root:skeleton@{{ .Values.app.ingress.host }}:{{ .Values.app.nodePorts.percona }}"
+{{- end }}

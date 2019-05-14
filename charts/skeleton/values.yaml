@@ -1,0 +1,37 @@
+# Default values for chart.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+# Project values
+project:
+  # {registryHostname}/{namespace}/{project}
+  repository: skeleton
+  # tag of images. Usually ${CI_PIPELINE_ID} or `minikube`
+  tag: latest-runtime
+# Application values
+app:
+  nodePorts:
+    percona:
+  # Settings of ingress
+  ingress:
+    # hostname of your service
+    host:
+  deployment:
+    volumes:
+      # use to mount local code
+      application:
+    # environment variables
+    env:
+      env_type:
+      # enables display errors of php and debug mode of app
+      debug: "0"
+      sentry_dsn: ""
+      app_secret: "f770a693a149f7c3aa64b241977e23d4"
+      mysql_database_url:
+      php:
+        error_reporting: "22527"
+
+percona:
+  enabled: true
+  mysqlRootPassword: skeleton
+  persistence:
+    enabled: true

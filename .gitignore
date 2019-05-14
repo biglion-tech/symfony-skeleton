@@ -16,3 +16,4 @@
 
 # helm
 charts/main/charts
+/charts/skeleton/charts/

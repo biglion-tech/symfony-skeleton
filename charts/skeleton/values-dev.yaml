@@ -1,0 +1,21 @@
+project:
+  tag: minikube
+app:
+  nodePorts:
+    percona: 30200
+  ingress:
+    host: skeleton.kube
+  deployment:
+    # environment variables
+    env:
+      env_type: 'dev'
+      # enables display errors of php and debug mode of app
+      debug: "1"
+      sentry_dsn: ""
+      php:
+        error_reporting: "32767"
+        ide_config: "serverName=skeleton"
+      xdebug_remote_host: "192.168.99.1"
+
+      mysql_database_url: "mysql://root:skeleton@skeleton-dev-percona:3306/skeleton"
+      app_secret: "f770a693a149f7c3aa64b241977e23d4"

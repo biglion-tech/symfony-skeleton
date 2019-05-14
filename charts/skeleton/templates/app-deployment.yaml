@@ -1,0 +1,53 @@
+kind: Deployment
+apiVersion: apps/v1beta1
+metadata:
+  name: {{ template "fullname" . }}-app
+  labels:
+    app: {{ template "name" . }}-app
+    chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: {{ template "name" . }}-app
+        release: {{ .Release.Name }}
+      annotations:
+        checksum/config: {{ include (print $.Template.BasePath "/app-configmap.yaml") . | sha256sum }}
+    spec:
+      imagePullSecrets:
+      - name: registry
+
+      {{ if .Values.app.deployment.volumes.application }}
+      volumes:
+        - name: application
+          hostPath:
+            path: {{ .Values.app.deployment.volumes.application | quote }}
+      {{ end }}
+
+      containers:
+      - name: php
+        image: {{ .Values.project.repository }}/php:{{ .Values.project.tag }}
+        ports:
+        - containerPort: 9000
+        {{ if .Values.app.deployment.volumes.application }}
+        volumeMounts:
+          - mountPath: /app
+            name: application
+        {{ end }}
+
+        envFrom:
+          - configMapRef:
+              name: {{ template "fullname" . }}-configmap
+
+      - name: nginx
+        image: {{ .Values.project.repository }}/nginx:{{ .Values.project.tag }}
+        ports:
+        - containerPort: 80
+        {{ if .Values.app.deployment.volumes.application }}
+        volumeMounts:
+          - mountPath: /app
+            name: application
+        {{ end }}

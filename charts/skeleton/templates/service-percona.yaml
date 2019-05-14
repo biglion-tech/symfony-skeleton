@@ -1,0 +1,14 @@
+{{- if .Values.app.nodePorts.percona }}
+kind: Service
+apiVersion: v1
+metadata:
+  name: {{ template "fullname" . }}-percona-service
+spec:
+  type: NodePort
+  selector:
+    app: {{ .Release.Name }}-percona
+  ports:
+    - port: 3306
+      nodePort: {{ .Values.app.nodePorts.percona }}
+      name: percona-port
+{{- end }}

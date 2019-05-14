@@ -1,0 +1,6 @@
+dependencies:
+- name: percona
+  repository: https://kubernetes-charts.storage.googleapis.com
+  version: 0.3.4
+digest: sha256:182ac93992b51c943b69256b2b7b52347602fed9a3a34022c10024486dfedda1
+generated: 2019-03-26T18:20:34.4110354+03:00
